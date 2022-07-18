@@ -1,5 +1,6 @@
 package com.test.test.article.controller;
 
+import com.test.test.article.dao.ArticleRepository;
 import com.test.test.article.domain.Article;
 import com.test.test.article.service.ArticleService;
 import lombok.AllArgsConstructor;
@@ -20,28 +21,28 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private ArticleRepository articleRepository;
 
     @RequestMapping("/")
     @ResponseBody
-    public String list(){
-        return "list";
+    public List<Article> List(){
+        return articleRepository.findAll();
     }
 
     @RequestMapping("/list")
+
     public String showList(Model model){
         List<Article> articleList = articleService.getList();
         model.addAttribute("articleList", articleList);
-
         return "/article_list";
     }
 
     @RequestMapping("/detail/{id}")
-    public String showQuestion(Model model, @PathVariable("id") Integer id){
+    public String showArticle(Model model, @PathVariable("id") Integer id){
         Article article = this.articleService.getArticle(id);
-        model.addAttribute("question", article);
+        model.addAttribute("article", article);
 
         return "/article_detail";
     }
-
-
 }
