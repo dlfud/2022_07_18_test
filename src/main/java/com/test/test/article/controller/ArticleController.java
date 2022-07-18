@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -19,11 +20,11 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-//    @RequestMapping("/list")
-//    @ResponseBody
-//    public List<Article> showList(){
-//        return articleService.getList();
-//    }
+    @RequestMapping("/")
+    @ResponseBody
+    public String list(){
+        return "list";
+    }
 
     @RequestMapping("/list")
     public String showList(Model model){
@@ -33,10 +34,12 @@ public class ArticleController {
     }
 
     @RequestMapping("/detail/{id}")
-    public String showArticle(Model model, @PathVariable("id") Integer id){
+    public String showQuestion(Model model, @PathVariable("id") Integer id){
         Article article = this.articleService.getArticle(id);
-        model.addAttribute("article", article);
+        model.addAttribute("question", article);
 
         return "/article_detail";
     }
+
+
 }

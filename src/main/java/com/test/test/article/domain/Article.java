@@ -10,17 +10,17 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 20)
-    private String title;
+    @Column(length = 200)
+    private String subject;
 
     @Column(columnDefinition = "TEXT")
     private String content;

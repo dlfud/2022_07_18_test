@@ -6,10 +6,9 @@ import com.test.test.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/reply")
@@ -19,9 +18,9 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @RequestMapping("/create/{id}")
-    public String createReply(Model model, @PathParam("id") Integer id, @RequestParam String content){
+    public String createReply(Model model, @PathVariable("id") Integer id, @RequestParam String content){
         Article article = this.articleService.getArticle(id);
         replyService.create(article, content);
-        return String.format("redirect:/article_detail/%s", id);
+        return String.format("redirect:/article/detail/%s", id);
     }
 }
