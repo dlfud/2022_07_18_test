@@ -20,6 +20,7 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+
     @RequestMapping("/")
     @ResponseBody
     public String list(){
@@ -30,6 +31,7 @@ public class ArticleController {
     public String showList(Model model){
         List<Article> articleList = articleService.getList();
         model.addAttribute("articleList", articleList);
+
         return "/article_list";
     }
 
